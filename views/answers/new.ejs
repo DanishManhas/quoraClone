@@ -1,0 +1,7 @@
+<% include ../partials/header %>
+<h1>Answer a question</h1>
+
+<form action="/questions/<%= id %>" method="POST">
+    <input type="text" style="width:60%; height: 60px" placeholder="Write your answer" name="body">
+    <input type="submit">
+</form>

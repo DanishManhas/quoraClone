@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+<h1>
+    <%= question.title %> 
+</h1>
+
+<% if(currentUser && question.author.id.equals(currentUser._id)){%>
+    <a href= "/questions/<%=question._id%>/edit" class = "btn btn-warning btn-xs">
+     Edit
+    </a>
+    <form class = "delete-form" method = "POST" action = "/questions/<%= question._id %>?_method=DELETE">
+      <button class = "btn btn-xs btn-danger">
+        Delete
+      </button>
+    </form>
+     <% } %> 
+
+<a href = "/questions/<%= question._id%>/answers/new"class="btn btn-primary">Add Comment</a>
+
+<% question.answers.forEach(function(answer){ %>
+<h3>
+    <%= answer.author.username %>
+</h3>   
+<p>
+    <%= answer.body %>
+</p>
+<% if(currentUser && answer.author.id.equals(currentUser._id)){%>
+    <a href= "/questions/<%=question._id%>/answers/<%=answer._id%>/edit" class = "btn btn-warning btn-xs">
+     Edit
+    </a>
+    <form class = "delete-form" method = "POST" action = "/questions/<%= question._id%>/answers/<%=answer._id %>?_method=DELETE">
+      <button class = "btn btn-xs btn-danger">
+        Delete
+      </button>
+    </form>
+     <% } %> 
+
+<%})%>
